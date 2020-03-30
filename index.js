@@ -10,10 +10,9 @@ const autoCompleteConfig = {
       return card.name;
     }, 
     async fetchData(searchTerm) {
-      const response = await axios.get('https://eu.api.blizzard.com/hearthstone/cards', {
+      const response = await axios.get('https://api.scryfall.com/cards/search', {
           params: {
-              locale: 'en_GB',
-              textFilter: searchTerm,
+              q: searchTerm,
               page: 1
           }
       });
@@ -35,15 +34,6 @@ const autoCompleteConfig = {
     }
   });
   
-  createAutoComplete({
-    ...autoCompleteConfig,
-    root: document.querySelector('#right-autocomplete'),
-    onOptionSelect(card) {
-      document.querySelector('.tutorial').classList.add('is-hidden');
-      onCardSelect(card, document.querySelector('.right-summary'));
-    }
-  });
-  
   const onCardSelect = async (card, summaryElement) => {
     const cardUrl = `https://api.scryfall.com/cards/${card.id}`;
     const response = await axios.get(cardUrl, {
@@ -55,6 +45,19 @@ const autoCompleteConfig = {
     summaryElement.innerHTML = cardTemplate(response.data);
   }
   
+  const deckTypesAllowed = cardDetails => {
+    const status = cardDetails.legalities;
+    // console.log('status:', status);
+    let validFormats = ``;
+    for (let format in status) {
+      if (status[format] === 'legal') {
+        // console.log(`${format}: ${status[format]}`);
+        validFormats += `<li>${format}</li>`
+      }
+    }
+    return validFormats;
+  }
+
   const cardTemplate = cardDetail => {
     return `
       <article class="media">
@@ -72,16 +75,16 @@ const autoCompleteConfig = {
         </div>
       </article>
       <article class="notification is-primary">
-        <p class="title">${cardDetail.rarity}</p>
-        <p class="subtitle">Rarity</p>
+        <p class="title">Rarity</p>
+        <p class="subtitle">${cardDetail.rarity}</p>
       </article>
       <article class="notification is-primary">
-        <p class="title">${cardDetail.mana_cost}</p>
-        <p class="subtitle">Mana cost</p>
+        <p class="title">Mana cost</p>
+        <p class="subtitle">${cardDetail.mana_cost}</p>
       </article>
       <article class="notification is-primary">
-        <p class="title">${cardDetail.released_at}</p>
-        <p class="subtitle">Release date</p>
+        <p class="title">Formats allowed</p>
+        <ul>${deckTypesAllowed(cardDetail)}</ul>
       </article>
     `;
   };
