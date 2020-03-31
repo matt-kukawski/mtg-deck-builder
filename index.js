@@ -1,5 +1,22 @@
-const userDeck = [];
+const userDeck = data;
 let selectedCard = {};
+
+const renderDeck = () => {
+  let htmlToRender = ``;
+  for (let card of userDeck) {
+    console.log('renderDeck card ', card.name);
+    htmlToRender +=
+      `<figure card-id="${card.id}" class="media-left deck-card">
+        <p class="image">
+          <img src="${card.image_uris.small}" />
+        </p>
+      </figure>`
+  }
+
+  document.querySelector('.right-deck').innerHTML = htmlToRender;
+};
+
+window.onload = renderDeck();
 
 const autoCompleteConfig = {
     renderOption(card) {
@@ -71,6 +88,7 @@ const autoCompleteConfig = {
     console.log('adding card');
     userDeck.push(cardDetails);
     console.log('userDeck:', userDeck);
+    renderDeck();
   }
 
   const cardTemplate = cardDetail => {

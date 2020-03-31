@@ -46,3 +46,8 @@
     height: 50px;
     margin-right: 10px;
   }
+
+  .deck-card {
+    float: left;
+    padding: 5px;
+  }
