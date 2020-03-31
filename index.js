@@ -6,14 +6,22 @@ const renderDeck = () => {
   for (let card of userDeck) {
     console.log('renderDeck card ', card.name);
     htmlToRender +=
-      `<figure card-id="${card.id}" class="media-left deck-card">
+      `<figure onclick={viewDeckCard(this.getAttribute("card-id"))} card-id="${card.id}" class="media-left deck-card">
         <p class="image">
-          <img src="${card.image_uris.small}" />
+          <img class="card-img" src="${card.image_uris.small}" />
         </p>
       </figure>`
   }
 
   document.querySelector('.right-deck').innerHTML = htmlToRender;
+  document.querySelector('.left-summary').innerHTML = '';
+  document.querySelector('.right-header').innerHTML = `
+    <div class="column notification is-primary tutorial">
+      <h1 class="title">Your deck (${userDeck.length} cards)</h1>
+        <p class="subtitle">Click to view card</p>
+    </div>
+  `;
+
 };
 
 window.onload = renderDeck();
@@ -53,7 +61,8 @@ const autoCompleteConfig = {
       onCardSelect(card, document.querySelector('.left-summary'));
       // console.log('card-left', card);
       selectedCard = card;
-    }
+    },
+    placeholder: "Search for a card..."
   });
   
   const onCardSelect = async (card, summaryElement) => {
@@ -90,43 +99,5 @@ const autoCompleteConfig = {
     console.log('userDeck:', userDeck);
     renderDeck();
   }
-
-  const cardTemplate = cardDetail => {
-    return `
-      <article class="media">
-        <figure class="media-left">
-          <p class="image">
-            <img src="${cardDetail.image_uris.small}" />
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <h1>${cardDetail.name}</h1>
-            <h4>${cardDetail.type_line}</h4>
-            <p>${cardDetail.oracle_text}</p>
-          </div>
-        </div>
-      </article>
-      <article class="notification is-primary">
-        <p class="title">Rarity</p>
-        <p class="subtitle">${cardDetail.rarity}</p>
-      </article>
-      <article class="notification is-primary">
-        <p class="title">Mana cost</p>
-        <p class="subtitle">${cardDetail.mana_cost}</p>
-      </article>
-      <article class="notification is-primary">
-        <p class="title">Formats allowed</p>
-        <ul>${deckTypesAllowed(cardDetail)}</ul>
-      </article>
-      <article class="notification is-primary">
-        <p class="title">Add to deck
-          <span class="icon">
-            <i onclick={addCardToDeck(selectedCard)} id="add-card-to-deck" class="far fa-plus-square"></i>
-          </span>
-        </p>
-      </article>
-    `;
-  };
 
  

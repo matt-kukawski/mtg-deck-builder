@@ -11,7 +11,7 @@
   }
   
   figure .image img {
-    width: 128px;
+    width: auto;
   }
   
   .notification {
@@ -50,4 +50,17 @@
   .deck-card {
     float: left;
     padding: 5px;
+  }
+
+  .deck-card:hover {
+    cursor: pointer;
+  }
+
+  span.icon:hover {
+    cursor: copy;
+  }
+
+  .feature-img {
+    width: 80%;
+    padding-left: 10px;
   }
