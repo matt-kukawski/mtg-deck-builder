@@ -1,3 +1,6 @@
+const userDeck = [];
+let selectedCard = {};
+
 const autoCompleteConfig = {
     renderOption(card) {
       const imgSrc = card.image_uris.small === 'N/A' ? '' : card.image_uris.small;
@@ -28,9 +31,11 @@ const autoCompleteConfig = {
     ...autoCompleteConfig,
     root: document.querySelector('#left-autocomplete'),
     onOptionSelect(card) {
+      document.querySelector('#left-autocomplete > input').value = '';
       document.querySelector('.tutorial').classList.add('is-hidden');
       onCardSelect(card, document.querySelector('.left-summary'));
-      console.log('card-left', card);
+      // console.log('card-left', card);
+      selectedCard = card;
     }
   });
   
@@ -41,7 +46,7 @@ const autoCompleteConfig = {
             
         }
     });
-    console.log(response.data);
+    // console.log(response.data);
     summaryElement.innerHTML = cardTemplate(response.data);
   }
   
@@ -55,7 +60,17 @@ const autoCompleteConfig = {
         validFormats += `<li>${format}</li>`
       }
     }
-    return validFormats;
+    if (validFormats.length > 0) {
+      return validFormats;
+    } else {
+      return `<li>Card not legal in recognized formats</li>`;
+    };
+  }
+
+  const addCardToDeck = (cardDetails) => {
+    console.log('adding card');
+    userDeck.push(cardDetails);
+    console.log('userDeck:', userDeck);
   }
 
   const cardTemplate = cardDetail => {
@@ -85,6 +100,13 @@ const autoCompleteConfig = {
       <article class="notification is-primary">
         <p class="title">Formats allowed</p>
         <ul>${deckTypesAllowed(cardDetail)}</ul>
+      </article>
+      <article class="notification is-primary">
+        <p class="title">Add to deck
+          <span class="icon">
+            <i onclick={addCardToDeck(selectedCard)} id="add-card-to-deck" class="far fa-plus-square"></i>
+          </span>
+        </p>
       </article>
     `;
   };
