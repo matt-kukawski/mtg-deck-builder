@@ -6,9 +6,14 @@ const renderDeck = () => {
   for (let card of userDeck) {
     console.log('renderDeck card ', card.name);
     htmlToRender +=
-      `<figure onclick={viewDeckCard(this.getAttribute("card-id"))} card-id="${card.id}" class="media-left deck-card">
+      `<figure card-id="${card.id}" class="media-left deck-card">
         <p class="image">
-          <img class="card-img" src="${card.image_uris.small}" />
+          <img img-id="${card.id}" onclick={viewDeckCard(this.getAttribute("img-id"))} class="card-img" src="${card.image_uris.small}" />
+          <div class="total-in-deck">
+            <i class="fas fa-minus" onclick={decrementCard(this.parentNode.parentNode.getAttribute("card-id"))}></i>
+              <span span-id="${card.id}">${card.count}</span>
+            <i class="fas fa-plus" onclick={incrementCard(this.parentNode.parentNode.getAttribute("card-id"))}></i>
+          </div>
         </p>
       </figure>`
   }
@@ -17,11 +22,10 @@ const renderDeck = () => {
   document.querySelector('.left-summary').innerHTML = '';
   document.querySelector('.right-header').innerHTML = `
     <div class="column notification is-primary tutorial">
-      <h1 class="title">Your deck (${userDeck.length} cards)</h1>
+      <h1 id="deck-count-div" class="title">Your deck (${deckSize(userDeck)} cards)</h1>
         <p class="subtitle">Click to view card</p>
     </div>
   `;
-
 };
 
 window.onload = renderDeck();
@@ -93,11 +97,6 @@ const autoCompleteConfig = {
     };
   }
 
-  const addCardToDeck = (cardDetails) => {
-    console.log('adding card');
-    userDeck.push(cardDetails);
-    console.log('userDeck:', userDeck);
-    renderDeck();
-  }
+
 
  

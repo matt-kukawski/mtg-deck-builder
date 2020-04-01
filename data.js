@@ -2,6 +2,7 @@ const data = [
     {
       "object": "card",
       "id": "f426c92c-6e71-49f0-9a91-0d529bf8c17d",
+      "count": 1,
       "oracle_id": "5bf49f39-b3d5-4148-8dc2-b5b5011769d2",
       "multiverse_ids": [
         443041
@@ -107,6 +108,7 @@ const data = [
     {
       "object": "card",
       "id": "cec0fe2c-e7e6-42d1-8128-58d70a7f1177",
+      "count": 1,
       "oracle_id": "9b0bc2d3-d64b-455a-a258-d3c91892f1a7",
       "multiverse_ids": [
         2841
@@ -209,6 +211,7 @@ const data = [
     {
       "object": "card",
       "id": "468d5308-2a6c-440e-a8d0-1c5e084afb82",
+      "count": 1,
       "oracle_id": "3d783beb-9ca6-4681-9276-fc3ad13b993f",
       "multiverse_ids": [
         456720
