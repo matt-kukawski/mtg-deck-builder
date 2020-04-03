@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
@@ -24,12 +25,16 @@
           </h1>
           <h4>To do...</h4>
           <ul>
-            <li>- Counter to cards to enable adding of multiple cards</li>
-            <li>- Remove from deck feature</li>
+            <li>- consolidate main card view functions?</li>
+            <li>- remove from deck feature (on main card view)</li>
             <li>- stats - count for cards of each value; colors of mana req'd etc</li>
             <li>- change click listeners to addEventListener() </li>
             <li>- consolidate 'find card by id' functionality</li>
-            <li>- remove card from deck if count hits 0</li>
+            <li>- use '.remove()' for +/- rather than rerender entire deck?</li>
+            <li>- add 4 card maximum</li>
+            <li>- min deck size</li>
+            <li>- sideboard?</li>
+            <li>- ability to save deck?</li>
           </ul>
         </div>
       </div>
@@ -45,6 +50,7 @@
           <div class="right-header"></div>
           <div class="right-deck"></div>
         </div>
+        <canvas id="myChart" width="400" height="400"></canvas>
       </div>
 
 
@@ -52,6 +58,7 @@
     <script src="utils.js"></script>
     <script src="autocomplete.js"></script>
     <script src="data.js"></script>
+    <script src="chart.js"></script>
     <script src="index.js"></script>
   </body>
 </html>

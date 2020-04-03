@@ -26,9 +26,15 @@ const renderDeck = () => {
         <p class="subtitle">Click to view card</p>
     </div>
   `;
+  if (userDeck.length > 0) {
+    renderManaCurve();
+  };
 };
 
-window.onload = renderDeck();
+window.onload = function() {
+  console.log('onload function');
+  renderDeck();
+}
 
 const autoCompleteConfig = {
     renderOption(card) {

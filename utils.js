@@ -64,7 +64,7 @@ const addCardToDeck = (cardDetails) => {
   } else {
     addDupeToDeck(cardDetails);
   }
-  console.log('userDeck:', userDeck);
+  // console.log('userDeck:', userDeck);
   renderDeck();
 }
 
@@ -86,7 +86,9 @@ const removeCard = (cardId) => {
 }
 
 const updateDeckCount = () => {
+  console.log('update deck executing...');
   document.querySelector('#deck-count-div').innerHTML = `Your deck (${deckSize(userDeck)} cards)`;
+  renderManaCurve();
 }
 
 const incDecCard = (cardId, action) => {
@@ -122,6 +124,21 @@ const incrementCard = (cardId) => {
   incDecCard(cardId, 'increment');
 }
 
+const manaCurve = () => {
+  console.log('manaCurve executing');
+  let curve = [0,0,0,0,0,0];
+
+  for (let card of userDeck) {
+    const cmc = card.cmc;
+    if (cmc > 6) {
+      curve[5] += card.count;
+    } else {
+      curve[cmc-1] += card.count;
+    }
+    // console.log(curve);
+  }
+  return curve;
+}
 
 
 
