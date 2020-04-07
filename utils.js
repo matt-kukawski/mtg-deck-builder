@@ -48,23 +48,34 @@ const viewDeckCard = (cardToView) => {
             selectedCard = card;
         }
     }
-    console.log('cardDetails:', cardDetails);
+    // console.log('cardDetails:', cardDetails);
     document.querySelector('.left-summary').innerHTML = cardTemplate(cardDetails);
 }
 
 const addDupeToDeck = cardDetails => {
+  // console.log('addDupeToDeck cardDetails:', cardDetails);
   cardDetails.count += 1;
 }
 
 const addCardToDeck = (cardDetails) => {
-  console.log('adding card: ', cardDetails);
-  if (!cardDetails.count) {
+  // console.log('adding card: ', cardDetails);
+  let alreadyAdded = '';
+  for (let card of userDeck) {
+    if (card.id === cardDetails.id) {
+      alreadyAdded = cardDetails.id;
+      if (card.count < 4) {
+        addDupeToDeck(card);
+      } else if (card.count === 4) {
+        alert('Maximum 4 cards of any one type in a deck');
+      } 
+    }
+  }
+
+  if (alreadyAdded.length < 1) {
     cardDetails.count = 1;
     userDeck.push(cardDetails);
-  } else {
-    addDupeToDeck(cardDetails);
-  }
-  // console.log('userDeck:', userDeck);
+  } 
+
   renderDeck();
 }
 
@@ -86,7 +97,7 @@ const removeCard = (cardId) => {
 }
 
 const updateDeckCount = () => {
-  console.log('update deck executing...');
+  // console.log('update deck executing...');
   document.querySelector('#deck-count-div').innerHTML = `Your deck (${deckSize(userDeck)} cards)`;
   renderManaCurve();
 }
@@ -108,9 +119,14 @@ const incDecCard = (cardId, action) => {
         }
         updateDeckCount();
       } else if (action === 'increment') {
-        userDeck[i].count += 1;
-        countElement.innerHTML = userDeck[i].count;
-        updateDeckCount();
+        // 4 card maximum per deck
+        if (userDeck[i].count < 4) {
+          userDeck[i].count += 1;
+          countElement.innerHTML = userDeck[i].count;
+          updateDeckCount();
+        } else {
+          alert('Maximum 4 cards of any one type in a deck');
+        }       
       }          
     }
   } 
