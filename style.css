@@ -1,7 +1,7 @@
-.tutorial {
-    width: 600px;
+.deck-header-cont {
+    width: 100%;/* 600px; */
     text-align: center;
-    margin: auto;
+    /* margin: auto; */
   }
   
   figure.image {
@@ -76,4 +76,17 @@
 
 #myChart {
   max-width: 300px;
+}
+
+/* .deck-summary {
+  clear: both;
+} */
+
+.deck-summary-column {
+  /* clear: both; */
+  /* margin-bottom: 5px; */
+}
+
+.chart-column {
+  max-width: 25%;
 }

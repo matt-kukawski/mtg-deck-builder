@@ -13,30 +13,37 @@ const debounce = (func, delay=1000) => {
 const cardTemplate = cardDetail => {
     console.log('cardTemplate called');
     return `
-      <div class="content">
-        <h1>${cardDetail.name}</h1>
-        <h4>${cardDetail.type_line}</h4>
+    <div class="columns">
+      <div class="column left-autocomplete">
+        <div class="content">
+          <h1>${cardDetail.name}</h1>
+          <h4>${cardDetail.type_line}</h4>
+        </div>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image feature-img">
+              <img src="${cardDetail.image_uris.normal}" />
+            </p>
+          </figure>
+        </article>
       </div>
-      <article class="media">
-        <figure class="media-left">
-          <p class="image feature-img">
-            <img src="${cardDetail.image_uris.normal}" />
+      <div class="column right-autocomplete">
+        <article class="notification is-primary">
+          <p class="title">Formats allowed</p>
+          <ul>${deckTypesAllowed(cardDetail)}</ul>
+        </article>
+        <article class="notification is-primary">
+          <p class="title">Add to deck
+            <span class="icon">
+              <i onclick={addCardToDeck(selectedCard)} id="add-card-to-deck" class="far fa-plus-square"></i>
+            </span>
           </p>
-        </figure>
-      </article>
-      <article class="notification is-primary">
-        <p class="title">Formats allowed</p>
-        <ul>${deckTypesAllowed(cardDetail)}</ul>
-      </article>
-      <article class="notification is-primary">
-        <p class="title">Add to deck
-          <span class="icon">
-            <i onclick={addCardToDeck(selectedCard)} id="add-card-to-deck" class="far fa-plus-square"></i>
-          </span>
-        </p>
-      </article>
+        </article>
+      </div>
+    </div>
     `;
   };
+
 
 const viewDeckCard = (cardToView) => {
     console.log('card-id: ', cardToView);
@@ -49,7 +56,7 @@ const viewDeckCard = (cardToView) => {
         }
     }
     // console.log('cardDetails:', cardDetails);
-    document.querySelector('.left-summary').innerHTML = cardTemplate(cardDetails);
+    document.querySelector('.autocomplete-summary').innerHTML = cardTemplate(cardDetails);
 }
 
 const addDupeToDeck = cardDetails => {
@@ -141,7 +148,7 @@ const incrementCard = (cardId) => {
 }
 
 const manaCurve = () => {
-  console.log('manaCurve executing');
+  // console.log('manaCurve executing');
   let curve = [0,0,0,0,0,0];
 
   for (let card of userDeck) {
@@ -156,6 +163,18 @@ const manaCurve = () => {
   return curve;
 }
 
+const sortBy = (field, reverse, primer) => {
+  const key = primer ?
+    function(x) {
+      return primer(x[field])
+    } :
+    function(x) {
+      return x[field]
+    };
 
+  reverse = !reverse ? 1 : -1;
 
-
+  return function(a, b) {
+    return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+  }
+}

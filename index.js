@@ -4,7 +4,7 @@ let selectedCard = {};
 const renderDeck = () => {
   let htmlToRender = ``;
   for (let card of userDeck) {
-    console.log('renderDeck card ', card.name);
+    // console.log('renderDeck card ', card.name);
     htmlToRender +=
       `<figure card-id="${card.id}" class="media-left deck-card">
         <p class="image">
@@ -18,22 +18,28 @@ const renderDeck = () => {
       </figure>`
   }
 
-  document.querySelector('.right-deck').innerHTML = htmlToRender;
-  document.querySelector('.left-summary').innerHTML = '';
-  document.querySelector('.right-header').innerHTML = `
-    <div class="column notification is-primary tutorial">
-      <h1 id="deck-count-div" class="title">Your deck (${deckSize(userDeck)} cards)</h1>
-        <p class="subtitle">Click to view card</p>
-    </div>
+  document.querySelector('.deck-summary').innerHTML = htmlToRender;
+  document.querySelector('.autocomplete-summary').innerHTML = '';
+  document.querySelector('.deck-header-cont').innerHTML = `
+    <h1 id="deck-count-div" class="title">Your deck (${deckSize(userDeck)} cards)</h1>
+    <p class="subtitle">Click to view card</p>  
   `;
   if (userDeck.length > 0) {
     renderManaCurve();
   };
+
+  const sortCont = document.querySelector('#sort-cards');
+  // console.log(sortCont);
+  if (sortCont === null) {
+    document.querySelector('.sort-container').innerHTML = renderSortCont();
+  }
+ 
 };
 
 window.onload = function() {
   console.log('onload function');
   renderDeck();
+  selectScript();
 }
 
 const autoCompleteConfig = {
@@ -64,11 +70,11 @@ const autoCompleteConfig = {
   
   createAutoComplete({
     ...autoCompleteConfig,
-    root: document.querySelector('#left-autocomplete'),
+    root: document.querySelector('#autocomplete-container'),
     onOptionSelect(card) {
-      document.querySelector('#left-autocomplete > input').value = '';
-      document.querySelector('.tutorial').classList.add('is-hidden');
-      onCardSelect(card, document.querySelector('.left-summary'));
+      document.querySelector('#autocomplete-container > input').value = '';
+      document.querySelector('.deck-header-cont').classList.add('is-hidden');
+      onCardSelect(card, document.querySelector('.autocomplete-summary'));
       // console.log('card-left', card);
       selectedCard = card;
     },
@@ -103,6 +109,18 @@ const autoCompleteConfig = {
     };
   }
 
-
-
- 
+  const renderSortCont = () => {
+    // console.log('renderSortCont called');
+      return `
+        <label for="sort-cards">Sort deck by:</label>
+  
+        <select id="sort-cards">
+          <option value="default">-</option>
+          <option value="mana-cost">Mana Cost - low to high</option>
+          <option value="mana-cost-rev">Mana Cost - high to low</option>
+          <option value="name">Name</option>
+          <option value="name-reverse">Name - reverse</option>
+          <option value="rarity">Rarity</option>
+        </select>
+      `
+  };

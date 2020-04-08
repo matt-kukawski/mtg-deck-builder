@@ -17,8 +17,6 @@ const renderManaCurve = () => {
             }]
         },
         options: {
-            // barValueSpacing : 1, 
-            // barDatasetSpacing : 1,
             legend: {
                 display: false,
             },
@@ -37,27 +35,7 @@ const renderManaCurve = () => {
                         display: false
                     }   
                 }]
-                // xAxes: [{
-                //     gridLines: {
-                //         color: "rgba(0, 0, 0, 0)",
-                //     }
-                // }],
-                // yAxes: [{
-                //     gridLines: {
-                //         color: "rgba(0, 0, 0, 0)",
-                //     }   
-                // }]
-            }//,
-            // plugins: {
-            //     datalabels: {
-            //         anchor: 'end',
-            //         align: 'top',
-            //         formatter: Math.round,
-            //         font: {
-            //         weight: 'bold'
-            //         }
-            //     }
-            // }
+            }
         }
     });
     // console.log('cardData in renderManaCurve func',cardData);

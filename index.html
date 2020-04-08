@@ -25,33 +25,39 @@
           </h1>
           <h4>To do...</h4>
           <ul>
+            <li>- fix header not rendering anymore (moved to index.html)</li>
             <li>- consolidate main card view functions?</li>
             <li>- remove from deck feature (on main card view)</li>
             <li>- stats - count for cards of each value; colors of mana req'd etc</li>
             <li>- change click listeners to addEventListener() </li>
             <li>- consolidate 'find card by id' functionality</li>
             <li>- use '.remove()' for +/- rather than rerender entire deck?</li>
-            <li>- check if card in deck before adding after search</li>
             <li>- min deck size</li>
             <li>- sideboard?</li>
             <li>- ability to save deck?</li>
-            <li>- deck reorder functionality</li>
           </ul>
         </div>
       </div>
     </section>
     <div class="container">
+      <div id="autocomplete-container"></div>
+      <div class="autocomplete-summary"></div>
+
       <div class="columns">
-        <div class="column">
-          <div id="left-autocomplete"></div>
-          <div class="left-summary"></div>
+        <div class="column deck-summary-column">
+          <div class="deck-header">
+            <div class="column notification is-primary deck-header-cont"></div>
+            <div class="sort-container"></div>
+          </div>
+          <div id="sort-deck"></div>
+          <div class="deck-summary"></div>
         </div>
 
-        <div class="column">
-          <div class="right-header"></div>
-          <div class="right-deck"></div>
+        <div class="column chart-column">
+          <div id="mana-chart-div">
+            <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
         </div>
-        <canvas id="myChart" width="400" height="400"></canvas>
       </div>
 
 
@@ -61,5 +67,6 @@
     <script src="data.js"></script>
     <script src="chart.js"></script>
     <script src="index.js"></script>
+    <script src="listeners.js"></script>
   </body>
 </html>
