@@ -23,6 +23,7 @@
               <i class="fas fa-hat-wizard"></i>
             </span>
           </h1>
+<!--
           <h4>To do...</h4>
           <ul>
             <li>- consolidate main card view functions?</li>
@@ -35,11 +36,17 @@
             <li>- sideboard?</li>
             <li>- ability to save deck?</li>
           </ul>
+-->
         </div>
       </div>
     </section>
     <div class="container">
-      <div id="autocomplete-container"></div>
+      <div class="columns">
+        <div class="column">
+          <div id="autocomplete-container"></div>
+        </div>
+        <div class="column"></div>
+      </div>
       <div class="autocomplete-summary"></div>
 
       <div class="columns">
@@ -55,8 +62,20 @@
           <div class="deck-summary"></div>
         </div>
 
-        <div class="column chart-column">
-          <div id="mana-chart-div">
+        <!-- <div class="column chart-column mana-curve-column"> -->
+          <!-- <div id="mana-chart-div"> -->
+            <!-- <div class="notification is-primary deck-header-cont"> -->
+              <!-- <h1 class="title">Mana curve</h1> -->
+            <!-- </div> -->
+            <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+          <!-- </div> -->
+        <!-- </div> -->
+
+        <div class="column mana-curve-column">
+          <div class="deck-header">
+            <div class="column notification is-primary mana-curve-cont">
+              <h1 class="title">Mana curve</h1>
+            </div>
             <canvas id="myChart" width="400" height="400"></canvas>
           </div>
         </div>

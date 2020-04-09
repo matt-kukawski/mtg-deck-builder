@@ -1,3 +1,4 @@
+
 .deck-header-cont {
     width: 100%;/* 600px; */
     text-align: center;
@@ -62,7 +63,7 @@
 
   .feature-img {
     width: 80%;
-    padding-left: 10px;
+    /* padding-left: 20px; */
   }
 
   .total-in-deck {
@@ -75,18 +76,42 @@
   }
 
 #myChart {
-  max-width: 300px;
-}
-
-/* .deck-summary {
-  clear: both;
-} */
-
-.deck-summary-column {
-  /* clear: both; */
-  /* margin-bottom: 5px; */
+  /* max-width: 300px; */
+  /* background-color: purple; */
+  padding-top: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  float: right;
 }
 
 .chart-column {
   max-width: 25%;
+}
+
+.right-autocomplete {
+  margin-left: 20px;
+}
+
+.left-autocomplete {
+  margin-left: 20px;
+}
+
+.deck-summary-column {
+  margin-left: 20px;
+}
+
+#autocomplete-container {
+  margin-left: 20px;
+}
+
+.mana-curve-cont {
+  height: 89px;
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+}
+
+.mana-curve-column {
+  margin-left: 20px;
+  max-width: 300px;
 }

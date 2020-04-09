@@ -9,7 +9,7 @@ const renderManaCurve = () => {
             datasets: [{
                 label: 'No. of cards',
                 data: cardData,
-                backgroundColor: 'hsl(120,100%, 50%)',
+                backgroundColor: 'hsla(199, 100%, 50%, 1)',
                 borderWidth: 0,
                 // barThickness: 50//,
                 categoryPercentage: 0.9,
