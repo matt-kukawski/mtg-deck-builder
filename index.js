@@ -20,12 +20,12 @@ const renderDeck = () => {
 
   document.querySelector('.deck-summary').innerHTML = htmlToRender;
   document.querySelector('.autocomplete-summary').innerHTML = '';
-  document.querySelector('.deck-header-cont').innerHTML = `
-    <h1 id="deck-count-div" class="title">Your deck (${deckSize(userDeck)} cards)</h1>
-    <p class="subtitle">Click to view card</p>  
-  `;
+  // document.querySelector('.deck-header-cont').innerHTML = `
+  //   <h1 id="deck-count-div" class="title">Your deck (${deckSize(userDeck)} cards)</h1>
+  //   <p class="subtitle">Click to view card</p>  
+  // `;
   if (userDeck.length > 0) {
-    renderManaCurve();
+    updateDeckCount();
   };
 
   const sortCont = document.querySelector('#sort-cards');
@@ -37,7 +37,7 @@ const renderDeck = () => {
 };
 
 window.onload = function() {
-  console.log('onload function');
+  // console.log('onload function');
   renderDeck();
   selectScript();
 }
@@ -47,7 +47,7 @@ const autoCompleteConfig = {
       const imgSrc = card.image_uris.small === 'N/A' ? '' : card.image_uris.small;
       return `
         <img src="${imgSrc}" />
-        ${card.name} (${card.mana_cost})
+        ${card.name}
       `;
     }, 
     inputValue(card) {
@@ -73,7 +73,7 @@ const autoCompleteConfig = {
     root: document.querySelector('#autocomplete-container'),
     onOptionSelect(card) {
       document.querySelector('#autocomplete-container > input').value = '';
-      document.querySelector('.deck-header-cont').classList.add('is-hidden');
+      // document.querySelector('.deck-header-cont').classList.add('is-hidden');
       onCardSelect(card, document.querySelector('.autocomplete-summary'));
       // console.log('card-left', card);
       selectedCard = card;

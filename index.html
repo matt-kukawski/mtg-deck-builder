@@ -25,10 +25,9 @@
           </h1>
           <h4>To do...</h4>
           <ul>
-            <li>- fix header not rendering anymore (moved to index.html)</li>
             <li>- consolidate main card view functions?</li>
             <li>- remove from deck feature (on main card view)</li>
-            <li>- stats - count for cards of each value; colors of mana req'd etc</li>
+            <li>- stats - colors of mana req'd</li>
             <li>- change click listeners to addEventListener() </li>
             <li>- consolidate 'find card by id' functionality</li>
             <li>- use '.remove()' for +/- rather than rerender entire deck?</li>
@@ -46,7 +45,10 @@
       <div class="columns">
         <div class="column deck-summary-column">
           <div class="deck-header">
-            <div class="column notification is-primary deck-header-cont"></div>
+            <div class="column notification is-primary deck-header-cont">
+              <h1 id="deck-count-div" class="title">Your deck (0 cards)</h1>
+              <p class="subtitle">Click to view card</p> 
+            </div>
             <div class="sort-container"></div>
           </div>
           <div id="sort-deck"></div>

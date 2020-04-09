@@ -20,31 +20,37 @@ const createAutoComplete = ({ root,
     const resultsWrapper = root.querySelector('.results');
     
     const onInput = async event => {
-      const request = await fetchData(event.target.value);
-    //   console.log('request:', request);  
-      const items = request.data;
+      try {
+        const request = await fetchData(event.target.value);
+        console.log('request:', request);  
+        const items = request.data;
 
-      // handling empty response
-      if (!items.length) {
-        dropdown.classList.remove('is-active');
-        // exit 'onInput' function
-        return;
-      }
-    
-      resultsWrapper.innerHTML = '';
-      dropdown.classList.add('is-active');
-      for (let item of items) {
-        const option = document.createElement('a');
-    
-        option.classList.add('dropdown-item');
-        option.innerHTML = renderOption(item);
-        option.addEventListener('click', () => {
+        // handling empty response
+        if (!items.length) {
           dropdown.classList.remove('is-active');
-          input.value = inputValue(item);
-          onOptionSelect(item);
-        });
-    
-        resultsWrapper.appendChild(option);
+          // exit 'onInput' function
+          return;
+        }
+      
+        resultsWrapper.innerHTML = '';
+        dropdown.classList.add('is-active');
+        for (let item of items) {
+          // console.log('item: ',item);
+          const option = document.createElement('a');
+      
+          option.classList.add('dropdown-item');
+          option.innerHTML = renderOption(item);
+          option.addEventListener('click', () => {
+            dropdown.classList.remove('is-active');
+            input.value = inputValue(item);
+            onOptionSelect(item);
+          });
+      
+          resultsWrapper.appendChild(option);
+        }
+      } catch(e) {
+        console.log('error: ', e);
+        alert('No cards match search term');
       }
     };
     input.addEventListener('input', debounce(onInput, 500));

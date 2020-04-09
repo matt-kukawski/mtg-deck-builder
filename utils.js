@@ -11,13 +11,14 @@ const debounce = (func, delay=1000) => {
 };
 
 const cardTemplate = cardDetail => {
-    console.log('cardTemplate called');
+    console.log('cardTemplate called: ', cardDetail);
+    const cardType = (cardDetail.type_line).replace(/[^a-zA-Z ]/g, "");
     return `
     <div class="columns">
       <div class="column left-autocomplete">
         <div class="content">
           <h1>${cardDetail.name}</h1>
-          <h4>${cardDetail.type_line}</h4>
+          <h4>${cardType}</h4>
         </div>
         <article class="media">
           <figure class="media-left">
@@ -32,18 +33,35 @@ const cardTemplate = cardDetail => {
           <p class="title">Formats allowed</p>
           <ul>${deckTypesAllowed(cardDetail)}</ul>
         </article>
-        <article class="notification is-primary">
-          <p class="title">Add to deck
-            <span class="icon">
-              <i onclick={addCardToDeck(selectedCard)} id="add-card-to-deck" class="far fa-plus-square"></i>
-            </span>
-          </p>
-        </article>
+        <div class="add-card-div">
+          ${cardInDeck(cardDetail.id)}
+        </div>
       </div>
     </div>
     `;
   };
 
+const cardInDeck = (cardId) => {
+  const alreadyPresent = userDeck.some(el => el.id === cardId);
+  console.log('alreadyPresent:', alreadyPresent);
+  if (alreadyPresent) {
+    return `
+      <article class="notification is-primary">
+        <p class="title">Card already in deck</p>
+      </article>
+    `
+  } else {
+    return `
+      <article class="notification is-primary">
+        <p class="title">Add to deck
+          <span class="icon">
+            <i onclick={addCardToDeck(selectedCard)} id="add-card-to-deck" class="far fa-plus-square"></i>
+          </span>
+        </p>
+      </article>
+    `
+  }
+}
 
 const viewDeckCard = (cardToView) => {
     console.log('card-id: ', cardToView);
@@ -127,7 +145,7 @@ const incDecCard = (cardId, action) => {
         updateDeckCount();
       } else if (action === 'increment') {
         // 4 card maximum per deck
-        if (userDeck[i].count < 4) {
+        if (userDeck[i].count < 4 || (userDeck[i].type_line).includes("Basic Land")) {
           userDeck[i].count += 1;
           countElement.innerHTML = userDeck[i].count;
           updateDeckCount();
