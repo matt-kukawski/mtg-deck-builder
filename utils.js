@@ -196,3 +196,79 @@ const sortBy = (field, reverse, primer) => {
     return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
   }
 }
+
+// count number of specified mana colors in deck
+const manaColorSummary = (userDeck) => {
+  const manaColors = [
+    { 
+      color: 'W',
+      count:0
+    },
+    { 
+      color: 'U',
+      count:0
+    },
+    { 
+      color: 'B',
+      count:0
+    },
+    { 
+      color: 'R',
+      count:0
+    },
+    { 
+      color: 'G',
+      count:0
+    },
+    { 
+      color: 'C',
+      count:0
+    }
+  ]
+  for (let card of userDeck) {
+    const colors = card.mana_cost.replace(/[^a-zA-Z ]/g, "")    
+    const manaColor = manaColors.filter(obj => {
+      return obj.color === card.colors[0]
+    })
+    manaColor[0].count += colors.length;
+  }
+  // console.log('manaColors:', manaColors);
+  return manaColors;
+}
+
+const colorConverter = (abbreviation) => {
+  switch(abbreviation) {
+    case 'W':
+      return 'White';
+      break;
+    case 'U':
+      return 'Blue';
+      break;
+    case 'B':
+      return 'Black';
+      break;
+    case 'R':
+      return 'Red';
+      break;
+    case 'G':
+      return 'Green';
+      break;
+    case 'C':
+      return 'Wastes';
+      break;
+    default:
+      break;
+  }
+}
+
+const renderManaColors = () => {
+  const manas = manaColorSummary(userDeck);
+  let htmlToRender = ``;
+  for (let mana of manas) {
+    if (mana.count > 0) {
+      htmlToRender += `<li class="mana-color-li">${colorConverter(mana.color)}: ${mana.count}</li>`;
+    }
+  }
+  const htmlToRenderUl = `<ul>${htmlToRender}</ul>`
+  document.querySelector('.mana-colors').innerHTML = htmlToRenderUl;
+}

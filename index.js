@@ -40,6 +40,7 @@ window.onload = function() {
   // console.log('onload function');
   renderDeck();
   selectScript();
+  renderManaColors();
 }
 
 const autoCompleteConfig = {
