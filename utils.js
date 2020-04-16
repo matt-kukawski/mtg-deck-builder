@@ -11,7 +11,7 @@ const debounce = (func, delay=1000) => {
 };
 
 const cardTemplate = cardDetail => {
-    console.log('cardTemplate called: ', cardDetail);
+    // console.log('cardTemplate called: ', cardDetail);
     const cardType = (cardDetail.type_line).replace(/[^a-zA-Z ]/g, "");
     return `
     <div class="columns">
@@ -43,7 +43,7 @@ const cardTemplate = cardDetail => {
 
 const cardInDeck = (cardId) => {
   const alreadyPresent = userDeck.some(el => el.id === cardId);
-  console.log('alreadyPresent:', alreadyPresent);
+  // console.log('alreadyPresent:', alreadyPresent);
   if (alreadyPresent) {
     return `
       <article class="notification is-primary">

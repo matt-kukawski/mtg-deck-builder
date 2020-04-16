@@ -22,7 +22,7 @@ const createAutoComplete = ({ root,
     const onInput = async event => {
       try {
         const request = await fetchData(event.target.value);
-        console.log('request:', request);  
+        // console.log('request:', request);  
         const items = request.data;
 
         // handling empty response

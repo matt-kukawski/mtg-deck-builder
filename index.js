@@ -20,10 +20,7 @@ const renderDeck = () => {
 
   document.querySelector('.deck-summary').innerHTML = htmlToRender;
   document.querySelector('.autocomplete-summary').innerHTML = '';
-  // document.querySelector('.deck-header-cont').innerHTML = `
-  //   <h1 id="deck-count-div" class="title">Your deck (${deckSize(userDeck)} cards)</h1>
-  //   <p class="subtitle">Click to view card</p>  
-  // `;
+
   if (userDeck.length > 0) {
     updateDeckCount();
   };
@@ -61,10 +58,8 @@ const autoCompleteConfig = {
               page: 1
           }
       });
-    //   if (response.data.Error) {
-    //       return [];
-    //   }
-      console.log('response.data:', response.data);
+
+      // console.log('response.data:', response.data);
       return response.data;
     }
   }
@@ -74,9 +69,7 @@ const autoCompleteConfig = {
     root: document.querySelector('#autocomplete-container'),
     onOptionSelect(card) {
       document.querySelector('#autocomplete-container > input').value = '';
-      // document.querySelector('.deck-header-cont').classList.add('is-hidden');
       onCardSelect(card, document.querySelector('.autocomplete-summary'));
-      // console.log('card-left', card);
       selectedCard = card;
     },
     placeholder: "Search for a card..."
@@ -99,7 +92,6 @@ const autoCompleteConfig = {
     let validFormats = ``;
     for (let format in status) {
       if (status[format] === 'legal') {
-        // console.log(`${format}: ${status[format]}`);
         validFormats += `<li>${format}</li>`
       }
     }
@@ -111,7 +103,6 @@ const autoCompleteConfig = {
   }
 
   const renderSortCont = () => {
-    // console.log('renderSortCont called');
       return `
         <label for="sort-cards">Sort deck by:</label>
   
