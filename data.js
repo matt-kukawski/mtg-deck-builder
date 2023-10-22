@@ -1,4 +1,3 @@
-/* 
 const data = [
     {
       "object": "card",
@@ -635,4 +634,4 @@ const data = [
       "count": 1
     }
   ]
-  */
+  
