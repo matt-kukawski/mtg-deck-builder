@@ -50,7 +50,7 @@ const createAutoComplete = ({ root,
         }
       } catch(e) {
         console.log('error: ', e);
-        alert('No cards match search term');
+        // alert('No cards match search term');
       }
     };
     input.addEventListener('input', debounce(onInput, 500));
