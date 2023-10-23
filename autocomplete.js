@@ -13,6 +13,7 @@ const createAutoComplete = ({ root,
           <div class="dropdown-content results"></div>
         </div>
       </div>
+      <div>Hint: try searching for dragon or wizard (or any other fantastical being) and see what appears!</div>
     `;
     
     const input = root.querySelector('input');
